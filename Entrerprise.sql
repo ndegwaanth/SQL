@@ -112,7 +112,165 @@ select * from customers;
 delete from Enterprise.customers
 where Country = "Uganda";
 
-select * from customers;
+select * from customers
+limit 3;
+-- fetch first 3 rows only;
+
+
+-- Products Table
+select * from Enterprise.Products;
+
+
+-- AGGREGATES fUNCTIONS
+-- MIN()
+SELECT MIN(Price)
+from Products;
+
+-- MAX()
+select MAX(Price)
+from Products;
+
+-- Setting columns names MINIMUM value
+select min(Price) as SmallestPrice
+from Products;
+
+-- Setting columns names MINIMUM value
+select max(Price) as HighestPrice
+from Products;
+
+
+-- MIN() with GROUP BY
+select SupplierID, MIN(Price) AS SmallestPrice
+from Products
+group by SupplierID;
+
+SELECT ProductID, ProductName, Price 
+FROM Products 
+WHERE Price = (SELECT MIN(Price) FROM Products);
+
+
+-- MAX() with GROUP BY
+select SupplierID, MAX(Price) AS SmallestPrice
+from Products
+group by SupplierID;
+
+SELECT ProductID, ProductName, Price 
+FROM Products 
+WHERE Price = (SELECT MAX(Price) FROM Products);
+
+-- COUNT()
+select count(*)
+from Products;
+
+select count(ProductID)
+from Products
+where Price > 20;
+
+-- SUM()
+select SUM(Price) AS Total
+from Products
+where Price > 20;
+
+select ProductID, SUM(Price) AS TotalPrice
+from Products
+group by ProductID;
+
+select SUM(Price * 130)
+from Products;
+
+-- OrderDetails Table
+select * from Enterprise.OrderDetails;
+select * from Enterprise.Products;
+
+select SUM(Price * Quantity)
+from OrderDetails
+left join Products on OrderDetails.ProductID = Products.ProductID;
+
+-- AVG()
+select AVG(Price)
+from Products;
+
+select AVG(Price)
+from Products
+where SupplierID = "SUP001";
+
+select * from Products
+where Price < (select AVG(Price) from Products);
+
+-- Removing Any Duplicates
+WITH CTE AS (
+    SELECT *, ROW_NUMBER() OVER (PARTITION BY ProductName, SupplierID, Unit, Price ORDER BY ProductID) AS row_num
+    FROM Products
+)
+DELETE FROM Products WHERE ProductID IN (SELECT ProductID FROM CTE WHERE row_num > 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
