@@ -7,7 +7,8 @@ INSERT INTO customers (
         PostalCode,
         Country
     )
-VALUES("Anthony", "Ndegwa", "Ushirika 45", "Nairobi", "59493", "Nairobi");
+VALUES
+("Anthony", "Ndegwa", "Ushirika 45", "Nairobi", "59493", "Nairobi");
 
 -- selecting all the records
 select * from Enterprise.customers;
@@ -17,3 +18,179 @@ select CustomerName, City from customers;
 
 -- select distinct records
 select distinct Country from customers;
+
+-- select distinct records from different fields
+select distinct City,CustomerName, PostalCode
+from customers;
+
+-- count  the distinct values
+select count(distinct Country) from customers;
+
+select Count(*) AS DistinctCounties
+from (select distinct Country from customers);
+
+-- selecting using where clause
+select * from Enterprise.customers
+where CustomerName ='Anthony';
+
+select City, CustomerName
+from Enterprise.customers
+where CustomerName='Anthony';
+
+-- order by clause
+select ContactName, CustomerAddress
+from Enterprise.customers
+order by City DESC, CustomerName ASC;
+
+-- AND clause
+select distinct * from customers
+where Country = "Nairobi" AND CustomerName LIKE "A%";
+
+-- OR clause
+select * from customers
+where Country = "Mexico" or Country = "Kenya";
+
+-- combination of OR and AND clause
+select * from  customers
+where (Country = "Nairobi" or Country = "Canada") AND (CustomerName LIKE "A%" or CustomerName LIKE "L%");
+
+-- NOT clause
+select * from customers
+where NOT Country = "Nairobi";
+
+select * from customers
+where CustomerName NOT LIKE "A%";
+
+-- select * from Enterprise.customers
+-- where ID NOT BETWEEN 1 and 3;
+
+select * from customers
+where City NOT IN ("Nairobi", "Mexico");
+
+-- INSERT INTO clause
+INSERT INTO Enterprise.customers (
+		CustomerName,
+        ContactName,
+        CustomerAddress,
+        City,
+        PostalCode,
+        Country
+        )
+VALUES
+('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway'),
+('Greasy Burger', 'Per Olsen', 'Gateveien 15', 'Sandnes', '4306', 'Norway'),
+('Tasty Tee', 'Finn Egan', 'Streetroad 19B', 'Liverpool', 'L1 0AA', 'UK');
+
+select * from customers;
+
+INSERT INTO Enterprise.customers (
+		CustomerName,
+        CustomerAddress,
+        City,
+        PostalCode,
+        Country
+        )
+values
+("fredrick", "umoja 34", "Karen", "59493", "Uganda");
+
+-- NULL
+select * from customers
+where ContactName IS NULL;
+
+-- NOT NULL
+select * from customers
+where ContactName IS NOT NULL; 
+
+-- UPDATE clause
+update Enterprise.customers
+set Country = "Kenya"
+where ContactName = "Ndegwa";
+
+select * from customers;
+
+-- DELETE clause
+delete from Enterprise.customers
+where Country = "Uganda";
+
+select * from customers;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
